@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'eclipse'
+}
+
+group = 'com.example'
+def archiveBaseName = 'airband'
+version = '0.0.1.0'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+eclipse {
+  project {
+    name = "${archiveBaseName}"
+  }
+}
+
+bootJar {
+   archiveFileName = "${archiveBaseName}-${version}.${archiveExtension.get()}"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+	implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.6.1'
+	implementation group: 'org.apache.tomcat', name: 'tomcat-jasper', version: '9.0.58'
+	implementation group: 'log4j', name: 'log4j', version: '1.2.16'
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
